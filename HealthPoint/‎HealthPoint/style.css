@@ -1,0 +1,232 @@
+:root {
+
+    --hp-light-green: #9de39d; 
+    --hp-mid-green: #7ebf7e;
+    --hp-dark-green: #5a8d5a; 
+    --hp-red: #d9534f;
+}
+
+body { 
+    background-color: #ffffff; 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+    font-family: sans-serif;
+    margin: 0;
+}
+
+/* Header Logic */
+.hp-header { 
+    background-color: var(--hp-light-green); 
+    height: 70px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 20px; 
+    border-bottom: 2px solid var(--hp-dark-green); 
+}
+
+.circle-icon { 
+    width: 45px; 
+    height: 45px; 
+    background-color: #e0e0e0; 
+    border: 2px solid #bbb;
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 10px; 
+    font-weight: bold; 
+}
+
+/* Layout Container */
+.main-wrapper { 
+    display: flex; 
+    flex: 1; 
+    height: calc(100vh - 70px);
+}
+
+/* Sidebar Styling */
+.hp-sidebar { 
+    width: 280px; 
+    background-color: #f8f9fa; 
+    border-right: 2px solid var(--hp-light-green); 
+    padding: 20px; 
+}
+
+.nav-link { 
+    color: #000 !important; 
+    background-color: var(--hp-light-green); 
+    margin-bottom: 15px; 
+    border-radius: 30px; 
+    text-align: center; 
+    padding: 15px;
+    font-weight: bold;
+    border: 2px solid var(--hp-dark-green) !important;
+    transition: 0.2s;
+}
+
+/* The 'Consult' button turns red when active */
+.nav-link.active { 
+    background: linear-gradient(to right, var(--hp-red) 50%, #ffffff 50%);
+    color: #000;
+    border: 2px solid var(--hp-red) !important;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+.nav-link:hover:not(.active) { 
+    background-color: var(--hp-mid-green); 
+    filter: brightness(0.9);
+}
+
+/* Content Area */
+.hp-content { 
+    flex: 1; 
+    padding: 60px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: #fff;
+}
+
+.placeholder-bubble { 
+    background-color: var(--hp-light-green); 
+    border-radius: 50px; 
+    padding: 50px 100px; 
+    border: 3px solid var(--hp-dark-green);
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/*LOGIN SCREEN*/
+
+/* Login specific styling */
+.login-container {
+    background: white;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 40px; /* Matching the pill vibe */
+    border: 3px solid var(--hp-light-green);
+}
+
+.form-control:focus {
+    border-color: var(--hp-dark-green);
+    box-shadow: 0 0 0 0.25rem rgba(157, 227, 157, 0.25);
+}
+
+/* Reusing your option-card style but making sure it works as a button */
+.btn.option-card {
+    background-color: var(--hp-light-green);
+    border: 2px solid var(--hp-dark-green);
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn.option-card:hover {
+    background-color: var(--hp-dark-green);
+    color: rgb(0, 0, 0);
+    transform: translateY(-2px);
+}
+
+/*Consult Screen*/
+
+/* Sidebar and Header logic */
+.hp-header { 
+background-color: var(--hp-light-green); 
+height: 70px; 
+display: flex; 
+align-items: center; 
+justify-content: space-between; 
+padding: 0 20px; 
+border-bottom: 2px solid var(--hp-dark-green); 
+}
+
+.main-wrapper { 
+display: flex; 
+height: calc(100vh - 70px); 
+}
+
+.hp-sidebar { 
+width: 280px; background-color: #ffffff; 
+border-right: 2px solid var(--hp-light-green); 
+padding: 20px;
+border-radius: 25px;
+}
+
+/* --- 1. THE SIDEBAR PILLS --- */
+.nav-link { 
+    color: #000 !important; 
+    background-color: var(--hp-light-green); 
+    margin-bottom: 15px; 
+    border-radius: 30px; 
+    text-align: center; 
+    padding: 12px; 
+    font-weight: bold; 
+    border: 2px solid var(--hp-dark-green) !important; 
+    transition: 0.2s ease-in-out;
+}
+
+/* Specific Red Highlight for Consult Tab */
+#consult-tab.active { 
+    background-color: var(--hp-red) !important; 
+    color: rgb(0, 0, 0) !important; 
+    border-color: #a94442 !important;
+    border-radius: 40px;
+}
+
+/* --- 2. THE CONSULT INTERFACE --- */
+.placeholder-bubble { 
+    background-color: var(--hp-light-green); 
+    border-radius: 40px; 
+    border: 3px solid var(--hp-dark-green); 
+    color: #333; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.option-card {
+    background-color: var(--hp-light-green);
+    border: 2px solid var(--hp-dark-green) !important;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.option-card:hover { 
+    background: linear-gradient(to right, #5a8d5a 50%, #ffffff 50%);
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 30px;
+    transform: translateY(-3px); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* --- 3. UI ELEMENTS --- */
+.circle-icon { 
+    width: 45px; 
+    height: 45px; 
+    background-color: #e0e0e0; 
+    border: 2px solid #bbb; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold; 
+}
+.nav-link:focus,
+.nav-link:active,
+.nav-link:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: var(--hp-light-green);
+    color: #000;
+}
