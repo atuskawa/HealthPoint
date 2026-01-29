@@ -154,30 +154,29 @@ display: flex;
 height: calc(100vh - 70px); 
 }
 
-.hp-sidebar { 
-width: 280px; background-color: #ffffff; 
-border-right: 2px solid var(--hp-light-green); 
-padding: 20px;
-}
-
-/* --- 1. THE SIDEBAR PILLS --- */
-.nav-link { 
-    color: #000 !important; 
-    background-color: var(--hp-light-green); 
-    margin-bottom: 15px; 
-    border-radius: 30px; 
-    text-align: center; 
-    padding: 12px; 
-    font-weight: bold; 
-    border: 2px solid var(--hp-dark-green) !important; 
+.hp-sidebar .nav-link {
+    display: block;
+    text-align: center;
+    padding: 12px 20px;
+    margin-bottom: 12px;
+    border-radius: 50px !important;   /* pill shape */
+    border: 2px solid var(--hp-dark-green) !important;
+    background-color: var(--hp-light-green) !important;
+    color: #000 !important;
+    font-weight: bold;
     transition: 0.2s ease-in-out;
 }
 
-/* Specific Red Highlight for Consult Tab */
-#consult-tab.active { 
-    background-color: var(--hp-red) !important; 
-    color: white !important; 
+.hp-sidebar .nav-link.active {
+    background-color: var(--hp-red) !important;  /* active pill red */
+    color: #fff !important;
     border-color: #a94442 !important;
+}
+
+.hp-sidebar .nav-link:not(.active):hover {
+    background-color: var(--hp-mid-green) !important;
+    color: #fff !important;
+    transform: translateY(-2px);
 }
 
 /* --- 2. THE CONSULT INTERFACE --- */
@@ -216,3 +215,9 @@ padding: 20px;
     justify-content: center; 
     font-weight: bold; 
 }
+#chat-window {
+    height: 250px !important;
+    max-height: 500px !important;
+    overflow-y: auto !important;
+}
+
