@@ -1,0 +1,161 @@
+:root { 
+    --hp-light-green: #9de39d; 
+    --hp-mid-green: #7ebf7e;
+    --hp-dark-green: #5a8d5a; 
+    --hp-red: #d9534f;
+    --hp-red-dark: #a94442;
+    --hp-gray: #e0e0e0;
+    --hp-border-gray: #bbb;
+}
+
+/* --- 1. GLOBAL RESET & BASE --- */
+body { 
+    background-color: #ffffff; 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+    font-family: sans-serif;
+    margin: 0;
+    font-size: 1.1rem; /* Upped base font size */
+}
+
+/* --- 2. LAYOUT COMPONENTS --- */
+.hp-header { 
+    background-color: var(--hp-light-green); 
+    height: 70px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 20px; 
+    border-bottom: 2px solid var(--hp-dark-green); 
+}
+
+.main-wrapper { 
+    display: flex; 
+    flex: 1; 
+    height: calc(100vh - 70px);
+}
+
+.hp-sidebar { 
+    width: 280px; 
+    background-color: #f8f9fa; 
+    border-right: 2px solid var(--hp-light-green); 
+    padding: 20px; 
+}
+
+.hp-content { 
+    flex: 1; 
+    padding: 60px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: #fff;
+}
+
+/* --- 3. NAVIGATION & BUTTONS --- */
+.nav-link { 
+    display: block;
+    color: #000 !important; 
+    background-color: var(--hp-light-green); 
+    margin-bottom: 15px; 
+    border-radius: 50px; 
+    text-align: center; 
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.1rem; /* Standardized link size */
+    border: 2px solid var(--hp-dark-green) !important;
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+
+.nav-link.active:not(#consult-tab) { 
+    background-color: var(--hp-dark-green) !important; 
+    color: white !important; 
+}
+
+#consult-tab.nav-link.active { 
+    background-color: var(--hp-red) !important; 
+    color: white !important; 
+    border-color: var(--hp-red-dark) !important; 
+}
+
+.nav-link:hover:not(.active) { 
+    background-color: var(--hp-mid-green); 
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+}
+
+/* --- 4. UI ELEMENTS & CARDS --- */
+.placeholder-bubble { 
+    background-color: var(--hp-light-green); 
+    border-radius: 40px; 
+    padding: 40px; /* Adjusted padding for better fit */
+    border: 3px solid var(--hp-dark-green);
+    font-size: 1.1rem; /* Matches the rest of the UI */
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+.option-card {
+    background-color: var(--hp-light-green);
+    border: 2px solid var(--hp-dark-green);
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem; /* Matches text size */
+    padding: 12px 20px;
+    transition: 0.2s ease-in-out;
+}
+
+.option-card:hover { 
+    background-color: var(--hp-dark-green); 
+    color: white; 
+    transform: translateY(-3px); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* --- 5. CHAT & RESPONSES --- */
+#chat-window {
+    height: 300px;
+    overflow-y: auto;
+    border: 2px solid var(--hp-light-green);
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#chat-window p, 
+.bot-response,
+.bot-response strong {
+    font-size: 1.1rem !important; /* Force consistency */
+    line-height: 1.6;
+}
+
+.btn-reset-triage {
+    background-color: var(--hp-red);
+    color: white;
+    border: none;
+    padding: 12px 30px; /* Beefier reset button */
+    border-radius: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1rem; /* No more small text */
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.btn-reset-triage:hover {
+    background-color: var(--hp-red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.bot-response {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}

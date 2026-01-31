@@ -1,0 +1,8 @@
+1. Download the full folder for safety
+2. Ilagay ung folder sa loob ng htdocs, follow this path:
+  C:\xampp\htdocs
+3. Open a browser and type
+  localhost/WebProgFinal/login.php
+
+IMPORTANT:
+Make sure naka import ung database sa xampp ninyo
