@@ -1,3 +1,8 @@
-Checkpoint 1 (01/30/26)
-- 50% of Frontend is dome
--Yatco has an API key for Gemini, standby for any updates regarding the use of the API for the website
+1. Download the full folder for safety
+2. Ilagay ung folder sa loob ng htdocs, follow this path:
+  C:\xampp\htdocs
+3. Open a browser and type
+  localhost/WebProgFinal/login.php
+
+IMPORTANT:
+Make sure naka import ung database sa xampp ninyo
