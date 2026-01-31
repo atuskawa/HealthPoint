@@ -1,0 +1,6 @@
+1. Open Xampp panel
+2. Start both Apache and MySQL
+3. Open admin 
+4. Select or click 'healthpoint'
+  (if wala pa, create database nlng kayo and make sure na healthpoint ung name. Else di mag w-work ung local host)
+5. Import the sent sql
