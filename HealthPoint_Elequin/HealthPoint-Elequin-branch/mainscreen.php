@@ -98,9 +98,10 @@ if (!isset($_SESSION["user_id"])) {
             </div>
 
             <div class="tab-pane fade" id="contact-content" role="tabpanel">
-                <div class="container-fluid" style="max-width: 900px;">
-                    <h3 class="mb-4" style="color: var(--hp-dark-green);">Available Doctors</h3>
-                    <div class="row g-4">
+                <div class="scrollable-content">
+                    <div class="container-fluid" style="max-width: 900px;">
+                        <h3 class="mb-4" style="color: var(--hp-dark-green);">Available Doctors</h3>
+                        <div class="row g-4">
                         <?php
                             $query = "SELECT * FROM doctors ORDER BY Rating DESC";
                             $result = mysqli_query($conn, $query);
@@ -126,14 +127,16 @@ if (!isset($_SESSION["user_id"])) {
                         <?php
                             }
                         ?>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="tab-pane fade" id="records-content" role="tabpanel">
-                <div class="container-fluid" style="max-width: 900px;">
-                    <h3 class="mb-4" style="color: var(--hp-dark-green);">Consultation History</h3>
-                    <div class="records-timeline">
+                <div class="scrollable-content">
+                    <div class="container-fluid" style="max-width: 900px;">
+                        <h3 class="mb-4" style="color: var(--hp-dark-green);">Consultation History</h3>
+                        <div class="records-timeline">
                         <div class="record-item">
                             <div class="record-date">Jan 28, 2026</div>
                             <div class="record-card">
@@ -165,6 +168,7 @@ if (!isset($_SESSION["user_id"])) {
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
 
