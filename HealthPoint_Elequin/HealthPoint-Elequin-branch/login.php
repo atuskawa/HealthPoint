@@ -56,10 +56,12 @@
 <body class="d-flex align-items-center justify-content-center bg-light py-4">
 
     <div class="login-container shadow-lg p-5 text-center">
-        <div class="circle-icon mx-auto mb-4" style="width: 80px; height: 80px; font-size: 1.2rem;">Logo</div>
-        
-        <h2 class="fw-bold mb-2" style="color: var(--hp-dark-green)">HealthPoint</h2>
-        <p class="text-muted mb-4">Your AI Health Companion</p>
+    <div class="logo-wrapper mx-auto mb-4">
+        <img src="HealthPointLogo.png" alt="HealthPoint Logo" class="login-logo">
+    </div>
+    
+    <h2 class="fw-bold mb-2" style="color: var(--hp-dark-green)">HealthPoint</h2>
+    <p class="text-muted mb-4">Your AI Health Companion</p>
 
         <form method="POST">
             <div class="mb-3 text-start">

@@ -54,66 +54,55 @@
     </head>
     <body class="d-flex align-items-center justify-content-center bg-light py-4">
 
-        <div class="login-container shadow-lg p-5 text-center">
+        <div class="register-container shadow-lg text-center">
             <h2 class="fw-bold mb-3" style="color: var(--hp-dark-green)">Create Account</h2>
 
             <form method="POST">
-                <div class="mb-3 text-start">
-                    <label class="form-label">
-                        First Name <span class="required">*</span>
-                    </label>
-                    <input type="text" name="first_name" class="form-control rounded-pill" required>
+                <div class="row g-2 mb-3">
+                    <div class="col-md-6 text-start">
+                        <label class="form-label">First Name <span class="required">*</span></label>
+                        <input type="text" name="first_name" class="form-control rounded-pill" required>
+                    </div>
+                    <div class="col-md-6 text-start">
+                        <label class="form-label">Last Name <span class="required">*</span></label>
+                        <input type="text" name="last_name" class="form-control rounded-pill" required>
+                    </div>
+                </div>
+
+                <div class="row g-2 mb-3">
+                    <div class="col-md-5 text-start">
+                        <label class="form-label">Middle Name</label>
+                        <input type="text" name="middle_name" class="form-control rounded-pill">
+                    </div>
+                    <div class="col-md-7 text-start">
+                        <label class="form-label">Username <span class="required">*</span></label>
+                        <input type="text" name="username" class="form-control rounded-pill" required>
+                    </div>
                 </div>
 
                 <div class="mb-3 text-start">
-                    <label class="form-label">Middle Name</label>
-                    <input type="text" name="middle_name" class="form-control rounded-pill">
-                </div>
-
-                <div class="mb-3 text-start">
-                    <label class="form-label">
-                        Last Name <span class="required">*</span>
-                    </label>
-                    <input type="text" name="last_name" class="form-control rounded-pill" required>
-                </div>
-
-                <div class="mb-3 text-start">
-                    <label class="form-label">
-                        Email <span class="required">*</span>
-                    </label>
+                    <label class="form-label">Email <span class="required">*</span></label>
                     <input type="email" name="email" class="form-control rounded-pill" required>
                 </div>
 
-                <div class="mb-3 text-start">
-                    <label class="form-label">
-                        Username <span class="required">*</span>
-                    </label>
-                    <input type="text" name="username" class="form-control rounded-pill" required>
-                </div>
-
-                <div class="mb-3 text-start">
-                    <label class="form-label">
-                        Password <span class="required">*</span>
-                    </label>
-                    <input type="password" name="password" class="form-control rounded-pill" required>
-                </div>
-
-                <div class="mb-4 text-start">
-                    <label class="form-label">
-                        Confirm Password <span class="required">*</span>
-                    </label>
-                    <input type="password" name="confirm_password" class="form-control rounded-pill" required>
+                <div class="row g-2 mb-4">
+                    <div class="col-md-6 text-start">
+                        <label class="form-label">Password <span class="required">*</span></label>
+                        <input type="password" name="password" class="form-control rounded-pill" required>
+                    </div>
+                    <div class="col-md-6 text-start">
+                        <label class="form-label">Confirm Password <span class="required">*</span></label>
+                        <input type="password" name="confirm_password" class="form-control rounded-pill" required>
+                    </div>
                 </div>
 
                 <?php if ($message): ?>
-                    <div class="alert alert-danger small"><?php echo $message; ?></div>
+                    <div class="alert alert-danger py-2 small"><?php echo $message; ?></div>
                 <?php endif; ?>
 
-                <button type="submit" class="btn option-card w-100 py-2">
-                    Create Account
-                </button>
+                <button type="submit" class="btn option-card w-100 py-2">Create Account</button>
             </form>
-        </div>
+        </div>   
             <p class="small mt-4 text-center">
                 Already have an account?
                 <a href="login.php" class="hp-link">

@@ -27,9 +27,9 @@ function startConsult(symptom) {
 // ====== DOCTOR-STYLE QUESTIONS ======
 function getRealisticResponse(symptom) {
     const responses = {
-        Headache: `<strong>Assessment:</strong> It seems like you’re experiencing a headache. We’ll want to understand whether it’s more likely tension-related or something vascular.<br><br><strong>Question:</strong> On a scale of 1 to 10, how intense is the pain?`,
+        Headache: `<strong>Assessment:</strong> It seems like you’re experiencing a headache. We’ll want to understand whether it’s more likely tension-related or something vascular.<br><br><strong>Question:</strong> From Mild to Severe, how intense is the pain?`,
         Fever: `<strong>Assessment:</strong> Your body temperature is elevated, which usually means your immune system is fighting something off.<br><br><strong>Question:</strong> How many days have you had this fever?`,
-        Nausea: `<strong>Assessment:</strong> You’re feeling nauseous, which can sometimes lead to dehydration if it continues.<br><br><strong>Question:</strong> How severe is your nausea, and have you been able to keep fluids down?`,
+        Nausea: `<strong>Assessment:</strong> You’re feeling nauseous, which can sometimes lead to dehydration if it continues.<br><br><strong>Question:</strong> From Mild to Severe, how severe is your nausea?`,
 
     };
     return responses[symptom] || "Data insufficient.";
