@@ -20,7 +20,7 @@ if (!isset($_SESSION["user_id"])) {
 <body>
 
 <header class="hp-header d-flex justify-content-between align-items-center px-3">
-    <div class="circle-icon">Logo</div>
+    <img src="src/hp_logo.png" alt="HealthPoint Logo" class="header-logo">
 
     <h3 class="m-0 fw-bold">
         Welcome, <?php echo htmlspecialchars($_SESSION["first_name"]); ?>
@@ -53,7 +53,7 @@ if (!isset($_SESSION["user_id"])) {
                     
                     <div class="placeholder-bubble shadow-sm">
                         <div class="alert alert-warning py-2 mb-3" style="border-radius: 20px; font-size: 0.8rem;">
-                            ⚠️ <strong>GUESSTIMATE ONLY:</strong> Not a diagnosis. See a doctor.
+                            ⚠️ <strong>GUESSTIMATE ONLY:</strong> This is not a Dignosis, Please book a Doctor for a proper consultation.
                         </div>
 
                         <div id="chat-window">
@@ -81,11 +81,74 @@ if (!isset($_SESSION["user_id"])) {
             </div>
 
             <div class="tab-pane fade" id="contact-content" role="tabpanel">
-                <div class="placeholder-bubble d-inline-block p-5">Doctor Directory Placeholder</div>
+                <div class="container-fluid" style="max-width: 900px;">
+                    <h3 class="mb-4" style="color: var(--hp-dark-green);">Available Doctors</h3>
+                    <div class="row g-4">
+                        <?php
+                            $query = "SELECT * FROM doctors ORDER BY Rating DESC";
+                            $result = mysqli_query($conn, $query);
+                            
+                            while ($doctor = mysqli_fetch_assoc($result)) {
+                                $initials = strtoupper($doctor['DoctorFirstName'][0] . $doctor['DoctorLastName'][0]);
+                                $fullName = $doctor['DoctorFirstName'] . ' ' . $doctor['DoctorLastName'];
+                                $isAvailable = strpos(strtolower($doctor['AvailabilityStatus']), 'available now') !== false ? 'online' : '';
+                        ?>
+                        <div class="col-md-6">
+                            <div class="doctor-card">
+                                <div class="doctor-header">
+                                    <div class="doctor-avatar"><?php echo $initials; ?></div>
+                                    <div class="doctor-status <?php echo $isAvailable; ?>"></div>
+                                </div>
+                                <h5 class="doctor-name">Dr. <?php echo htmlspecialchars($fullName); ?></h5>
+                                <p class="doctor-specialty"><?php echo htmlspecialchars($doctor['Specialization']); ?></p>
+                                <div class="doctor-rating mb-2">⭐ <?php echo $doctor['Rating']; ?> (<?php echo $doctor['ReviewCount']; ?> reviews)</div>
+                                <p class="doctor-availability"><?php echo htmlspecialchars($doctor['AvailabilityStatus']); ?></p>
+                                <button class="btn option-card w-100 py-2">Book Appointment</button>
+                            </div>
+                        </div>
+                        <?php
+                            }
+                        ?>
+                    </div>
+                </div>
             </div>
 
             <div class="tab-pane fade" id="records-content" role="tabpanel">
-                <div class="placeholder-bubble d-inline-block p-5">Your Medical Records</div>
+                <div class="container-fluid" style="max-width: 900px;">
+                    <h3 class="mb-4" style="color: var(--hp-dark-green);">Consultation History</h3>
+                    <div class="records-timeline">
+                        <div class="record-item">
+                            <div class="record-date">Jan 28, 2026</div>
+                            <div class="record-card">
+                                <h6 class="record-title">Headache Consultation</h6>
+                                <p class="record-doctor"><strong>Dr. Amanda Silva</strong> - General Practitioner</p>
+                                <p class="record-symptoms"><strong>Symptoms:</strong> Headache, Fatigue</p>
+                                <p class="record-diagnosis"><strong>Assessment:</strong> Tension headache, advised rest and hydration</p>
+                                <a href="#" class="record-link">Download PDF</a>
+                            </div>
+                        </div>
+                        <div class="record-item">
+                            <div class="record-date">Jan 15, 2026</div>
+                            <div class="record-card">
+                                <h6 class="record-title">General Checkup</h6>
+                                <p class="record-doctor"><strong>Dr. Amanda Silva</strong> - General Practitioner</p>
+                                <p class="record-symptoms"><strong>Symptoms:</strong> Routine checkup</p>
+                                <p class="record-diagnosis"><strong>Assessment:</strong> All vitals normal, healthy overall</p>
+                                <a href="#" class="record-link">Download PDF</a>
+                            </div>
+                        </div>
+                        <div class="record-item">
+                            <div class="record-date">Dec 20, 2025</div>
+                            <div class="record-card">
+                                <h6 class="record-title">Allergy Assessment</h6>
+                                <p class="record-doctor"><strong>Dr. James Kumar</strong> - Allergist</p>
+                                <p class="record-symptoms"><strong>Symptoms:</strong> Sneezing, Itchy eyes</p>
+                                <p class="record-diagnosis"><strong>Assessment:</strong> Seasonal allergies, prescribed antihistamines</p>
+                                <a href="#" class="record-link">Download PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="tab-pane fade" id="settings-content" role="tabpanel">

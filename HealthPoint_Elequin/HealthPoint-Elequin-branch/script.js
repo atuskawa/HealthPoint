@@ -15,7 +15,7 @@ function startConsult(symptom) {
         loader.classList.add("d-none");
         chat.innerHTML += `
             <div class="bot-response p-3 mb-3 border-start border-4 border-success bg-light">
-                <strong>HealthPoint Clinician:</strong><br>
+                <strong>HealthPoint Bot:</strong><br>
                 ${getRealisticResponse(symptom)}
             </div>
         `;

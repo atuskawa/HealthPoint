@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2026 at 06:59 AM
+-- Generation Time: Feb 01, 2026 at 12:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -118,8 +118,22 @@ CREATE TABLE `doctors` (
   `DoctorID` int(11) NOT NULL,
   `DoctorFirstName` varchar(50) DEFAULT NULL,
   `DoctorMidName` varchar(50) DEFAULT NULL,
-  `DoctorLastName` varchar(50) DEFAULT NULL
+  `DoctorLastName` varchar(50) DEFAULT NULL,
+  `Specialization` varchar(100) DEFAULT NULL,
+  `Rating` decimal(2,1) DEFAULT 0.0,
+  `ReviewCount` int(11) DEFAULT 0,
+  `AvailabilityStatus` varchar(50) DEFAULT 'Offline'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `doctors`
+--
+
+INSERT INTO `doctors` (`DoctorID`, `DoctorFirstName`, `DoctorMidName`, `DoctorLastName`, `Specialization`, `Rating`, `ReviewCount`, `AvailabilityStatus`) VALUES
+(1, 'Sarah', NULL, 'Jenkins', 'General Practitioner', 4.9, 215, 'Available now'),
+(2, 'Mark', NULL, 'Sloan', 'Family Physician', 4.7, 142, 'Available in 30 mins'),
+(3, 'Lori', NULL, 'Quinn', 'Internal Medicine', 4.8, 89, 'Available now'),
+(4, 'David', NULL, 'Miller', 'General Medicine', 4.6, 110, 'Available tomorrow');
 
 -- --------------------------------------------------------
 
@@ -263,7 +277,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `UserFirstName`, `UserMidName`, `UserLastName`, `username`, `password`, `created_at`, `UserEmail`) VALUES
-(4, 'Timothy', '', 'Elequin', 'timothyelequin', '$2y$10$GTdP/dvCNL85LZmx5AW0rOtuc3xPMZr15mMPZWj8zuddRdjgHLzYG', '2026-01-31 04:32:53', 'elequintimothyjudd@gmail.com');
+(4, 'Timothy', '', 'Elequin', 'timothyelequin', '$2y$10$GTdP/dvCNL85LZmx5AW0rOtuc3xPMZr15mMPZWj8zuddRdjgHLzYG', '2026-01-31 04:32:53', 'elequintimothyjudd@gmail.com'),
+(5, 'JOSH', 'FRANCIS', 'YATCO', 'yatzzz', '$2y$10$PYDYpquXi/Ifr5ld3xaLQ.SBSFTtmZM9ZsC1tzlJuCYUMxrhXj96.', '2026-01-31 15:54:29', 'shirokohayakawa@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -330,7 +345,7 @@ ALTER TABLE `consultations`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `DoctorID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `DoctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `patients`
@@ -342,7 +357,7 @@ ALTER TABLE `patients`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

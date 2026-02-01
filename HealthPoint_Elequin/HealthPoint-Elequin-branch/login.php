@@ -57,7 +57,7 @@
 
     <div class="login-container shadow-lg p-5 text-center">
     <div class="logo-wrapper mx-auto mb-4">
-        <img src="HealthPointLogo.png" alt="HealthPoint Logo" class="login-logo">
+        <img src="src/hp_logo.png" alt="HealthPoint Logo" class="login-logo">
     </div>
     
     <h2 class="fw-bold mb-2" style="color: var(--hp-dark-green)">HealthPoint</h2>
