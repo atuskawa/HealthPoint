@@ -1,95 +1,185 @@
 // ====== STATE ======
 let currentSymptom = null;
+let followUpStep = 0;
 
 // ====== ENTRY POINT ======
 function startConsult(symptom) {
-    currentSymptom = symptom; 
+    currentSymptom = symptom;
+    followUpStep = 0;
 
     const chat = document.getElementById("chat-window");
     const loader = document.getElementById("ai-loading");
 
-    chat.innerHTML += `<div class="text-end mb-2"><span class="badge rounded-pill bg-light text-dark p-2 border">Patient: ${symptom}</span></div>`;
+    chat.innerHTML += `<div class="text-end mb-2">
+        <span class="badge rounded-pill bg-light text-dark p-2 border">Patient: ${symptom}</span>
+    </div>`;
     loader.classList.remove("d-none");
 
     setTimeout(() => {
         loader.classList.add("d-none");
-        chat.innerHTML += `
-            <div class="bot-response p-3 mb-3 border-start border-4 border-success bg-light">
-                <strong>HealthPoint Bot:</strong><br>
-                ${getRealisticResponse(symptom)}
-            </div>
-        `;
-        chat.scrollTop = chat.scrollHeight;
-        showFollowUpOptions(symptom);
-    }, 800);
+        showNextFollowUp();
+    }, 1200);
 }
 
-// ====== DOCTOR-STYLE QUESTIONS ======
-function getRealisticResponse(symptom) {
-    const responses = {
-        Headache: `<strong>Assessment:</strong> It seems like you’re experiencing a headache. We’ll want to understand whether it’s more likely tension-related or something vascular.<br><br><strong>Question:</strong> From Mild to Severe, how intense is the pain?`,
-        Fever: `<strong>Assessment:</strong> Your body temperature is elevated, which usually means your immune system is fighting something off.<br><br><strong>Question:</strong> How many days have you had this fever?`,
-        Nausea: `<strong>Assessment:</strong> You’re feeling nauseous, which can sometimes lead to dehydration if it continues.<br><br><strong>Question:</strong> From Mild to Severe, how severe is your nausea?`,
+// ====== FOLLOW-UP QUESTIONS DATA ======
+const followUps = {
+    Headache: [
+        {
+            question: "On a scale from Mild to Severe, how would you rate the intensity of your headache?",
+            options: ["Mild", "Moderate", "Severe"]
+        },
+        {
+            question: "Do you experience nausea, vision changes, or sensitivity to light?",
+            options: ["Yes", "No"]
+        },
+        {
+            question: "How long have you been experiencing headaches?",
+            options: ["Less than a day", "1-3 days", "More than 3 days"]
+        }
+    ],
+    Fever: [
+        {
+            question: "How many days have you been experiencing this fever?",
+            options: ["Less than 3 days", "More than 3 days"]
+        },
+        {
+            question: "Do you have chills, body aches, or sweating?",
+            options: ["Yes", "No"]
+        }
+    ],
+    Nausea: [
+        {
+            question: "On a scale from Mild to Severe, how would you describe the intensity of your nausea?",
+            options: ["Mild", "Moderate", "Severe"]
+        },
+        {
+            question: "Have you vomited in the past 24 hours?",
+            options: ["Yes", "No"]
+        }
+    ]
+};
 
-    };
-    return responses[symptom] || "Data insufficient.";
-}
-
-// ====== FOLLOW-UP BUTTONS ======
-function showFollowUpOptions(symptom) {
+// ====== SHOW FOLLOW-UP QUESTIONS ======
+function showNextFollowUp() {
+    const chat = document.getElementById("chat-window");
     const container = document.getElementById("option-buttons");
-    if (symptom === "Headache" || symptom === "Nausea") {
-        container.innerHTML = `
-            <div class="col-md-4"><button class="option-card w-100 py-3" onclick="answerFollowUp('Mild')">Mild</button></div>
-            <div class="col-md-4"><button class="option-card w-100 py-3" onclick="answerFollowUp('Moderate')">Moderate</button></div>
-            <div class="col-md-4"><button class="option-card w-100 py-3" onclick="answerFollowUp('Severe')">Severe</button></div>
-        `;
-    } else if (symptom === "Fever") {
-        container.innerHTML = `
-            <div class="col-md-6"><button class="option-card w-100 py-3" onclick="answerFollowUp('Less than 3 days')">Less than 3 days</button></div>
-            <div class="col-md-6"><button class="option-card w-100 py-3" onclick="answerFollowUp('More than 3 days')">More than 3 days</button></div>
-        `;
+
+    const currentFollowUps = followUps[currentSymptom];
+    if (!currentFollowUps || followUpStep >= currentFollowUps.length) {
+        showFinalReport();
+        return;
     }
+
+    const followUp = currentFollowUps[followUpStep];
+
+    chat.innerHTML += `
+        <div class="bot-response p-3 mb-3 border-start border-4 border-success bg-light">
+            <strong>HealthPoint Bot:</strong><br>${followUp.question}
+        </div>
+    `;
+
+    container.innerHTML = followUp.options.map(option => 
+        `<div class="col-md-${Math.ceil(12/followUp.options.length)}">
+            <button class="option-card w-100 py-3" onclick="answerFollowUp('${option}')">${option}</button>
+        </div>`).join("");
+
+    chat.scrollTop = chat.scrollHeight;
 }
 
-// ====== THE TRIAGE LOGIC (NO FILLER) ======
+// ====== HANDLE FOLLOW-UP ANSWERS ======
+const answers = []; // store all answers
+
 function answerFollowUp(answer) {
     const chat = document.getElementById("chat-window");
     const container = document.getElementById("option-buttons");
     const loader = document.getElementById("ai-loading");
 
-    chat.innerHTML += `<div class="text-end mb-2"><span class="badge rounded-pill bg-success text-white p-2">${answer}</span></div>`;
-    container.innerHTML = ""; 
+    chat.innerHTML += `<div class="text-end mb-2">
+        <span class="badge rounded-pill bg-success text-white p-2">${answer}</span>
+    </div>`;
+    container.innerHTML = "";
+    loader.classList.remove("d-none");
+
+    answers.push(answer);
+    followUpStep++;
+
+    setTimeout(() => {
+        loader.classList.add("d-none");
+        showNextFollowUp();
+    }, 800);
+}
+
+// ====== FINAL CLINIC REPORT ======
+function showFinalReport() {
+    const chat = document.getElementById("chat-window");
+    const loader = document.getElementById("ai-loading");
+
     loader.classList.remove("d-none");
 
     setTimeout(() => {
         loader.classList.add("d-none");
-        let clinicalReport = "";
 
-        // HARD LOGIC - NO GENERIC TEXT ALLOWED
+        let report = "";
+
         if (currentSymptom === "Headache") {
-            clinicalReport = (answer === "Severe") ?
-                "<strong>Notice:</strong> Your headache is quite intense. If you experience vision changes, dizziness, or sudden weakness, please seek immediate medical attention." :
-                "<strong>Plan:</strong> Stay hydrated, consider over-the-counter pain relief, and rest in a low-light environment for a few hours.";
+            if (answers.includes("Severe") || answers.includes("Yes")) {
+                report = "<strong>Notice:</strong> Your headache may require urgent evaluation. Watch for vision changes, weakness, numbness, or confusion.";
+            } else {
+                report = "<strong>Plan:</strong> Rest, stay hydrated, and consider over-the-counter pain relief if needed.";
+            }
         } else if (currentSymptom === "Fever") {
-            clinicalReport = (answer === "More than 3 days") ?
-                "<strong>Notice:</strong> A fever lasting more than 3 days warrants further evaluation. Please contact your healthcare provider for blood tests or additional assessment." :
-                "<strong>Plan:</strong> Keep monitoring your temperature every few hours, rest, and take antipyretics like Paracetamol if needed. Stay hydrated.";
+            if (answers.includes("More than 3 days") || answers.includes("Yes")) {
+                report = "<strong>Notice:</strong> Persistent fever or associated symptoms warrant contacting your healthcare provider.";
+            } else {
+                report = "<strong>Plan:</strong> Rest, hydrate, and monitor your temperature. Use antipyretics if necessary.";
+            }
         } else if (currentSymptom === "Nausea") {
-            clinicalReport = (answer === "Severe") ?
-                "<strong>Notice:</strong> Severe nausea can lead to dehydration. If you cannot keep fluids down, consider contacting a healthcare professional." :
-                "<strong>Plan:</strong> Drink small sips of water or clear fluids, avoid heavy meals, and monitor for any abdominal pain or worsening symptoms.";
+            if (answers.includes("Severe") || answers.includes("Yes")) {
+                report = "<strong>Notice:</strong> Severe nausea or repeated vomiting may cause dehydration. Seek medical attention.";
+            } else {
+                report = "<strong>Plan:</strong> Sip fluids, eat light meals, and monitor symptoms.";
+            }
         }
 
         chat.innerHTML += `
             <div class="bot-response p-3 mb-2 border-start border-4 border-primary bg-white shadow-sm">
-                <strong>Clinician Report:</strong><br>${clinicalReport}
+                <strong>HealthPoint Report:</strong><br>${report}
                 <hr>
                 <div class="text-center">
                     <button class="btn-reset-triage" onclick="location.reload()">Reset Triage</button>
                 </div>
             </div>
         `;
+
         chat.scrollTop = chat.scrollHeight;
     }, 1200);
 }
+
+// ====== SIDEBAR TOGGLE ======
+document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('sidebarToggle');
+    const sidebar = document.querySelector('.hp-sidebar');
+
+    console.log('[HP] sidebar init:', { togglePresent: !!toggle, sidebarPresent: !!sidebar });
+
+    if (!toggle || !sidebar) return;
+
+    // restore state from localStorage
+    const collapsed = localStorage.getItem('hp_sidebar_collapsed') === '1';
+    if (collapsed) sidebar.classList.add('collapsed');
+
+    toggle.addEventListener('click', function (ev) {
+        console.log('[HP] sidebar toggle clicked');
+        sidebar.classList.toggle('collapsed');
+        const isCollapsed = sidebar.classList.contains('collapsed');
+        localStorage.setItem('hp_sidebar_collapsed', isCollapsed ? '1' : '0');
+    });
+
+    // keyboard accessibility: Space or Enter toggles when focused
+    toggle.addEventListener('keydown', function (ev) {
+        if (ev.key === ' ' || ev.key === 'Enter') {
+            ev.preventDefault();
+            toggle.click();
+        }
+    });
+});

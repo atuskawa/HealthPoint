@@ -200,8 +200,12 @@ body {
 
 .header-logo {
     height: 50px;
-    width: auto;
+    width: 50px;
+    border-radius: 50%;
     object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .circle-icon {
@@ -216,6 +220,81 @@ body {
     font-weight: bold;
     font-size: 1.1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-text {
+    font-size: 1.25rem; /* Noticeable but not obnoxious */
+    font-weight: 600;    /* Semi-bold looks professional */
+    color: var(--hp-dark-green); /* Use the variable we set up earlier */
+    margin-bottom: 0.5rem;
+}
+
+/* --- SIDEBAR TOGGLE & COLLAPSE --- */
+.menu-btn {
+    width: 44px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    padding: 0 8px;
+}
+
+.hp-sidebar {
+    width: 280px;
+    transition: width 0.28s ease, opacity 0.28s ease; /* keep original width but animated */
+}
+
+.hp-sidebar.collapsed {
+    width: 90px !important;
+    min-width: 90px !important;
+    padding: 12px 10px !important;
+    border-right: 0 !important;
+    overflow: visible;
+    opacity: 1;
+}
+
+/* Icon + label inside nav */
+.hp-sidebar .nav-link {
+    padding: 12px 16px;
+}
+
+.hp-sidebar .nav-icon {
+    font-size: 1.25rem;
+    width: 28px;
+    text-align: center;
+}
+
+.hp-sidebar .nav-label {
+    white-space: nowrap;
+    transition: opacity 0.18s ease, width 0.18s ease, margin 0.18s ease;
+}
+
+/* When collapsed: hide labels and center icons */
+.hp-sidebar.collapsed .nav-label {
+    opacity: 0;
+    width: 0;
+    margin: 0;
+    display: inline-block;
+    visibility: hidden;
+}
+
+.hp-sidebar.collapsed .nav-link {
+    justify-content: center;
+    padding: 12px 8px !important;
+}
+
+/* When sidebar is collapsed, let content take full space */
+.hp-content {
+    transition: margin-left 0.28s ease, padding 0.28s ease;
+}
+
+/* Small tweak: add a left margin when sidebar present on larger screens */
+@media (min-width: 768px) {
+    .main-wrapper {
+        align-items: stretch;
+    }
 }
 
 .form-label {

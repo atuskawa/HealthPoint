@@ -20,29 +20,46 @@ if (!isset($_SESSION["user_id"])) {
 <body>
 
 <header class="hp-header d-flex justify-content-between align-items-center px-3">
-    <img src="src/hp_logo.png" alt="HealthPoint Logo" class="header-logo">
+    <div class="d-flex align-items-center gap-2">
+        <button id="sidebarToggle" class="menu-btn btn btn-light" aria-label="Toggle sidebar">☰</button>
+        <img src="src/hp_logo.png" alt="HealthPoint Logo" class="header-logo">
+    </div>
 
-    <h3 class="m-0 fw-bold">
-        Welcome, <?php echo htmlspecialchars($_SESSION["first_name"]); ?>
-    </h3>
+    <div class="d-flex align-items-center gap-3">
+        <h3 class="m-0 welcome-text">
+            Hi, <?php echo htmlspecialchars($_SESSION["first_name"]); ?>
+        </h3>
 
-    <div class="circle-icon">
-        <?php 
-        // User initials
-        echo htmlspecialchars(
-            strtoupper($_SESSION["first_name"][0] . $_SESSION["last_name"][0])
-        ); 
-        ?>
+        <div class="circle-icon">
+            <?php 
+            // User initials
+            echo htmlspecialchars(
+                strtoupper($_SESSION["first_name"][0] . $_SESSION["last_name"][0])
+            ); 
+            ?>
+        </div>
     </div>
 </header>
 
 <div class="main-wrapper">
     
     <nav class="hp-sidebar nav flex-column nav-pills" id="v-pills-tab" role="tablist">
-        <button class="nav-link active" id="consult-tab" data-bs-toggle="pill" data-bs-target="#consult-content" type="button" role="tab">Consult</button>
-        <button class="nav-link" id="contact-tab" data-bs-toggle="pill" data-bs-target="#contact-content" type="button" role="tab">Contact Doctor</button>
-        <button class="nav-link" id="records-tab" data-bs-toggle="pill" data-bs-target="#records-content" type="button" role="tab">Records</button>
-        <button class="nav-link" id="settings-tab" data-bs-toggle="pill" data-bs-target="#settings-content" type="button" role="tab">Settings</button>
+        <button class="nav-link active d-flex align-items-center" id="consult-tab" data-bs-toggle="pill" data-bs-target="#consult-content" type="button" role="tab" title="Consult">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label ms-2">Consult</span>
+        </button>
+        <button class="nav-link d-flex align-items-center" id="contact-tab" data-bs-toggle="pill" data-bs-target="#contact-content" type="button" role="tab" title="Contact Doctor">
+            <span class="nav-icon">🩺</span>
+            <span class="nav-label ms-2">Contact Doctor</span>
+        </button>
+        <button class="nav-link d-flex align-items-center" id="records-tab" data-bs-toggle="pill" data-bs-target="#records-content" type="button" role="tab" title="Records">
+            <span class="nav-icon">🗂️</span>
+            <span class="nav-label ms-2">Records</span>
+        </button>
+        <button class="nav-link d-flex align-items-center" id="settings-tab" data-bs-toggle="pill" data-bs-target="#settings-content" type="button" role="tab" title="Settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label ms-2">Settings</span>
+        </button>
     </nav>
 
     <main class="hp-content">
